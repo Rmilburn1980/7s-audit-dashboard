@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<!-- saved from url=(0062)file:///C:/Users/Scarl/Downloads/7S_Audit_Dashboard%20(6).html -->
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<html lang="en">
+<head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>7S to Success | Workplace Organisation Audit Dashboard</title>
 <script>
@@ -403,43 +403,22 @@
 
   <!-- DASHBOARD -->
   <section id="dashboard" class="view active">
-    <div class="grid" id="statCards">
-      <div class="card stat-card">
-        <div class="label">Overall Score</div>
-        <div class="value">74%</div>
-        <div class="sub">Latest audit: 2026-09-09</div>
-      </div>
-      <div class="card stat-card">
-        <div class="label">Trend</div>
-        <div class="value">+0 pts</div>
-        <div class="sub">vs previous audit</div>
-      </div>
-      <div class="card stat-card">
-        <div class="label">Lowest Scoring S</div>
-        <div class="value" style="font-size:1.2rem;">Sort (2/5)</div>
-        <div class="sub">Focus area for next actions</div>
-      </div>
-      <div class="card stat-card">
-        <div class="label">Audits Logged</div>
-        <div class="value">2</div>
-        <div class="sub">First: 2026-09-09</div>
-      </div>
-    </div>
+    <div class="grid" id="statCards"></div>
 
     <div class="chart-row">
       <div class="chart-card">
         <h3>Latest Audit — Score by S</h3>
-        <div class="chart-wrap"><canvas id="radarChart" width="550" height="300" style="display: block; box-sizing: border-box; height: 300px; width: 550px;"></canvas></div>
+        <div class="chart-wrap"><canvas id="radarChart"></canvas></div>
       </div>
       <div class="chart-card">
         <h3>Overall Score Trend</h3>
-        <div class="chart-wrap"><canvas id="trendChart" width="497" height="300" style="display: block; box-sizing: border-box; height: 300px; width: 497px;"></canvas></div>
+        <div class="chart-wrap"><canvas id="trendChart"></canvas></div>
       </div>
     </div>
 
     <div class="chart-card">
       <h3>Latest vs Previous Audit — by S</h3>
-      <div class="chart-wrap"><canvas id="compareChart" width="1102" height="300" style="display: block; box-sizing: border-box; height: 300px; width: 1102px;"></canvas></div>
+      <div class="chart-wrap"><canvas id="compareChart"></canvas></div>
     </div>
   </section>
 
@@ -464,322 +443,7 @@
       </div>
     </div>
 
-    <div id="sBands"><div class="s-band">
-      <div class="s-head" style="background:#00D9C0;">
-        <div class="titlewrap">
-          <div class="num">1</div>
-          <div>
-            <h3>Sort</h3>
-            <div class="tagline">Remove the unnecessary</div>
-          </div>
-        </div>
-        <div class="score-pill" data-scorepill="sort">0 / 5</div>
-      </div>
-      <div class="s-body">
-        
-          <div class="item-row">
-            <input type="checkbox" id="sort_0" data-s="sort">
-            <label for="sort_0">Unnecessary items removed from the work area</label>
-            <span class="detail-mark no" data-mark="sort_0">✗</span>
-          </div>
-        
-          <div class="item-row">
-            <input type="checkbox" id="sort_1" data-s="sort">
-            <label for="sort_1">Only needed tools/materials present at the station</label>
-            <span class="detail-mark no" data-mark="sort_1">✗</span>
-          </div>
-        
-          <div class="item-row">
-            <input type="checkbox" id="sort_2" data-s="sort">
-            <label for="sort_2">A red-tag process is used for uncertain items</label>
-            <span class="detail-mark no" data-mark="sort_2">✗</span>
-          </div>
-        
-          <div class="item-row">
-            <input type="checkbox" id="sort_3" data-s="sort">
-            <label for="sort_3">Walkways and floor space are clear</label>
-            <span class="detail-mark no" data-mark="sort_3">✗</span>
-          </div>
-        
-          <div class="item-row">
-            <input type="checkbox" id="sort_4" data-s="sort">
-            <label for="sort_4">No obsolete WIP or scrap accumulating</label>
-            <span class="detail-mark no" data-mark="sort_4">✗</span>
-          </div>
-        
-        <textarea class="notes" data-notes="sort" placeholder="Notes / evidence for Sort..."></textarea>
-      </div>
-    </div><div class="s-band">
-      <div class="s-head" style="background:#FFB800;">
-        <div class="titlewrap">
-          <div class="num">2</div>
-          <div>
-            <h3>Set</h3>
-            <div class="tagline">A place for everything</div>
-          </div>
-        </div>
-        <div class="score-pill" data-scorepill="set">0 / 5</div>
-      </div>
-      <div class="s-body">
-        
-          <div class="item-row">
-            <input type="checkbox" id="set_0" data-s="set">
-            <label for="set_0">Every item has a designated, labelled location</label>
-            <span class="detail-mark no" data-mark="set_0">✗</span>
-          </div>
-        
-          <div class="item-row">
-            <input type="checkbox" id="set_1" data-s="set">
-            <label for="set_1">Frequently used items are within easy reach</label>
-            <span class="detail-mark no" data-mark="set_1">✗</span>
-          </div>
-        
-          <div class="item-row">
-            <input type="checkbox" id="set_2" data-s="set">
-            <label for="set_2">Shadow boards / outlines are used for tools</label>
-            <span class="detail-mark no" data-mark="set_2">✗</span>
-          </div>
-        
-          <div class="item-row">
-            <input type="checkbox" id="set_3" data-s="set">
-            <label for="set_3">Storage locations are clearly signed</label>
-            <span class="detail-mark no" data-mark="set_3">✗</span>
-          </div>
-        
-          <div class="item-row">
-            <input type="checkbox" id="set_4" data-s="set">
-            <label for="set_4">Items are returned to place after use</label>
-            <span class="detail-mark no" data-mark="set_4">✗</span>
-          </div>
-        
-        <textarea class="notes" data-notes="set" placeholder="Notes / evidence for Set..."></textarea>
-      </div>
-    </div><div class="s-band">
-      <div class="s-head" style="background:#00E68A;">
-        <div class="titlewrap">
-          <div class="num">3</div>
-          <div>
-            <h3>Shine</h3>
-            <div class="tagline">Clean &amp; inspect</div>
-          </div>
-        </div>
-        <div class="score-pill" data-scorepill="shine">0 / 5</div>
-      </div>
-      <div class="s-body">
-        
-          <div class="item-row">
-            <input type="checkbox" id="shine_0" data-s="shine">
-            <label for="shine_0">Work area is clean at start and end of shift</label>
-            <span class="detail-mark no" data-mark="shine_0">✗</span>
-          </div>
-        
-          <div class="item-row">
-            <input type="checkbox" id="shine_1" data-s="shine">
-            <label for="shine_1">Equipment is inspected during cleaning</label>
-            <span class="detail-mark no" data-mark="shine_1">✗</span>
-          </div>
-        
-          <div class="item-row">
-            <input type="checkbox" id="shine_2" data-s="shine">
-            <label for="shine_2">Cleaning responsibilities are assigned</label>
-            <span class="detail-mark no" data-mark="shine_2">✗</span>
-          </div>
-        
-          <div class="item-row">
-            <input type="checkbox" id="shine_3" data-s="shine">
-            <label for="shine_3">Leaks, wear or damage are identified early</label>
-            <span class="detail-mark no" data-mark="shine_3">✗</span>
-          </div>
-        
-          <div class="item-row">
-            <input type="checkbox" id="shine_4" data-s="shine">
-            <label for="shine_4">Cleaning schedule is followed and visible</label>
-            <span class="detail-mark no" data-mark="shine_4">✗</span>
-          </div>
-        
-        <textarea class="notes" data-notes="shine" placeholder="Notes / evidence for Shine..."></textarea>
-      </div>
-    </div><div class="s-band">
-      <div class="s-head" style="background:#FF3B5C;">
-        <div class="titlewrap">
-          <div class="num">4</div>
-          <div>
-            <h3>Standardize</h3>
-            <div class="tagline">Make it the standard</div>
-          </div>
-        </div>
-        <div class="score-pill" data-scorepill="standardize">0 / 5</div>
-      </div>
-      <div class="s-body">
-        
-          <div class="item-row">
-            <input type="checkbox" id="standardize_0" data-s="standardize">
-            <label for="standardize_0">Visual standards / SOPs are displayed at the station</label>
-            <span class="detail-mark no" data-mark="standardize_0">✗</span>
-          </div>
-        
-          <div class="item-row">
-            <input type="checkbox" id="standardize_1" data-s="standardize">
-            <label for="standardize_1">Checklists are used to maintain Sort, Set and Shine</label>
-            <span class="detail-mark no" data-mark="standardize_1">✗</span>
-          </div>
-        
-          <div class="item-row">
-            <input type="checkbox" id="standardize_2" data-s="standardize">
-            <label for="standardize_2">Standards are consistent across similar areas</label>
-            <span class="detail-mark no" data-mark="standardize_2">✗</span>
-          </div>
-        
-          <div class="item-row">
-            <input type="checkbox" id="standardize_3" data-s="standardize">
-            <label for="standardize_3">Colour coding is used consistently</label>
-            <span class="detail-mark no" data-mark="standardize_3">✗</span>
-          </div>
-        
-          <div class="item-row">
-            <input type="checkbox" id="standardize_4" data-s="standardize">
-            <label for="standardize_4">Standards are reviewed and updated regularly</label>
-            <span class="detail-mark no" data-mark="standardize_4">✗</span>
-          </div>
-        
-        <textarea class="notes" data-notes="standardize" placeholder="Notes / evidence for Standardize..."></textarea>
-      </div>
-    </div><div class="s-band">
-      <div class="s-head" style="background:#00D9C0;">
-        <div class="titlewrap">
-          <div class="num">5</div>
-          <div>
-            <h3>Sustain</h3>
-            <div class="tagline">Make it a habit</div>
-          </div>
-        </div>
-        <div class="score-pill" data-scorepill="sustain">0 / 5</div>
-      </div>
-      <div class="s-body">
-        
-          <div class="item-row">
-            <input type="checkbox" id="sustain_0" data-s="sustain">
-            <label for="sustain_0">Regular 7S audits are carried out</label>
-            <span class="detail-mark no" data-mark="sustain_0">✗</span>
-          </div>
-        
-          <div class="item-row">
-            <input type="checkbox" id="sustain_1" data-s="sustain">
-            <label for="sustain_1">Audit results are displayed and communicated</label>
-            <span class="detail-mark no" data-mark="sustain_1">✗</span>
-          </div>
-        
-          <div class="item-row">
-            <input type="checkbox" id="sustain_2" data-s="sustain">
-            <label for="sustain_2">Corrective actions are tracked to closure</label>
-            <span class="detail-mark no" data-mark="sustain_2">✗</span>
-          </div>
-        
-          <div class="item-row">
-            <input type="checkbox" id="sustain_3" data-s="sustain">
-            <label for="sustain_3">7S is part of onboarding and training</label>
-            <span class="detail-mark no" data-mark="sustain_3">✗</span>
-          </div>
-        
-          <div class="item-row">
-            <input type="checkbox" id="sustain_4" data-s="sustain">
-            <label for="sustain_4">Leadership visibly reinforces 7S habits</label>
-            <span class="detail-mark no" data-mark="sustain_4">✗</span>
-          </div>
-        
-        <textarea class="notes" data-notes="sustain" placeholder="Notes / evidence for Sustain..."></textarea>
-      </div>
-    </div><div class="s-band">
-      <div class="s-head" style="background:#FFB800;">
-        <div class="titlewrap">
-          <div class="num">6</div>
-          <div>
-            <h3>Safety</h3>
-            <div class="tagline">Zero harm</div>
-          </div>
-        </div>
-        <div class="score-pill" data-scorepill="safety">0 / 5</div>
-      </div>
-      <div class="s-body">
-        
-          <div class="item-row">
-            <input type="checkbox" id="safety_0" data-s="safety">
-            <label for="safety_0">No unaddressed hazards in the area</label>
-            <span class="detail-mark no" data-mark="safety_0">✗</span>
-          </div>
-        
-          <div class="item-row">
-            <input type="checkbox" id="safety_1" data-s="safety">
-            <label for="safety_1">PPE is available and used correctly</label>
-            <span class="detail-mark no" data-mark="safety_1">✗</span>
-          </div>
-        
-          <div class="item-row">
-            <input type="checkbox" id="safety_2" data-s="safety">
-            <label for="safety_2">Safety signage and guarding are in place</label>
-            <span class="detail-mark no" data-mark="safety_2">✗</span>
-          </div>
-        
-          <div class="item-row">
-            <input type="checkbox" id="safety_3" data-s="safety">
-            <label for="safety_3">Near-misses and incidents are reported and reviewed</label>
-            <span class="detail-mark no" data-mark="safety_3">✗</span>
-          </div>
-        
-          <div class="item-row">
-            <input type="checkbox" id="safety_4" data-s="safety">
-            <label for="safety_4">Emergency routes and equipment are accessible</label>
-            <span class="detail-mark no" data-mark="safety_4">✗</span>
-          </div>
-        
-        <textarea class="notes" data-notes="safety" placeholder="Notes / evidence for Safety..."></textarea>
-      </div>
-    </div><div class="s-band">
-      <div class="s-head" style="background:#00E68A;">
-        <div class="titlewrap">
-          <div class="num">7</div>
-          <div>
-            <h3>Spirit</h3>
-            <div class="tagline">Engage the team</div>
-          </div>
-        </div>
-        <div class="score-pill" data-scorepill="spirit">0 / 5</div>
-      </div>
-      <div class="s-body">
-        
-          <div class="item-row">
-            <input type="checkbox" id="spirit_0" data-s="spirit">
-            <label for="spirit_0">Team actively participates in 7S activities</label>
-            <span class="detail-mark no" data-mark="spirit_0">✗</span>
-          </div>
-        
-          <div class="item-row">
-            <input type="checkbox" id="spirit_1" data-s="spirit">
-            <label for="spirit_1">Ideas and suggestions from operators are acted on</label>
-            <span class="detail-mark no" data-mark="spirit_1">✗</span>
-          </div>
-        
-          <div class="item-row">
-            <input type="checkbox" id="spirit_2" data-s="spirit">
-            <label for="spirit_2">Good performance is recognised</label>
-            <span class="detail-mark no" data-mark="spirit_2">✗</span>
-          </div>
-        
-          <div class="item-row">
-            <input type="checkbox" id="spirit_3" data-s="spirit">
-            <label for="spirit_3">Cross-team collaboration is visible</label>
-            <span class="detail-mark no" data-mark="spirit_3">✗</span>
-          </div>
-        
-          <div class="item-row">
-            <input type="checkbox" id="spirit_4" data-s="spirit">
-            <label for="spirit_4">Employees show ownership of their area</label>
-            <span class="detail-mark no" data-mark="spirit_4">✗</span>
-          </div>
-        
-        <textarea class="notes" data-notes="spirit" placeholder="Notes / evidence for Spirit..."></textarea>
-      </div>
-    </div></div>
+    <div id="sBands"></div>
 
     <div class="btn-row">
       <button class="btn btn-primary" id="saveAuditBtn">Save Audit</button>
@@ -1976,6 +1640,5 @@
   syncFromRemote(renderDashboard);
 })();
 </script>
-
-
-</body></html>
+</body>
+</html>

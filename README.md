@@ -1,5 +1,9 @@
 # 7S Audit Dashboard
 
+[![7S audit dashboard showing the empty state before any audit is logged](docs/screenshot.png)](https://rmilburn1980.github.io/7s-audit-dashboard/)
+
+[Try it live](https://rmilburn1980.github.io/7s-audit-dashboard/) · [Portfolio hub](https://rmilburn1980.github.io/)
+
 Workplace organisation audit covering Sort, Set, Shine, Standardize, Sustain, Safety and Spirit.
 
 It is a single HTML page with no build step and no server. Data stays in your browser by default.

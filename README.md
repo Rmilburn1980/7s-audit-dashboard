@@ -1,6 +1,8 @@
 # 7S Audit Dashboard
 
-[![7S audit dashboard showing the empty state before any audit is logged](docs/screenshot.png)](https://rmilburn1980.github.io/7s-audit-dashboard/)
+[![7S audit dashboard with three example audits](docs/screenshot.png)](https://rmilburn1980.github.io/7s-audit-dashboard/)
+
+*The screenshot uses made-up example audits, not real records.*
 
 [Try it live](https://rmilburn1980.github.io/7s-audit-dashboard/) · [Portfolio hub](https://rmilburn1980.github.io/)
 

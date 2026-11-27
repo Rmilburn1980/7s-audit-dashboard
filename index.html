@@ -335,6 +335,12 @@
     align-items:end;
   }
   @media (max-width:760px){ .add-action-form{grid-template-columns:1fr 1fr;} }
+  @media (max-width:480px){ .add-action-form{grid-template-columns:1fr;} }
+  .add-action-form .field{min-width:0;}
+  .add-action-form input{width:100%;box-sizing:border-box;}
+  .example-bar{display:none;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px 14px;background:rgba(255,184,0,0.12);color:#FFD166;border-bottom:1px solid #2A3A52;font-size:0.85rem;padding:9px 16px;text-align:center;}
+  .example-bar.show{display:flex;}
+  .example-bar button{font:inherit;font-weight:700;color:#11192B;background:#FFD166;border:0;border-radius:999px;padding:6px 14px;cursor:pointer;min-height:32px;}
   .add-action-form .field{display:flex;flex-direction:column;gap:4px;}
   .add-action-form label{font-size:0.75rem;color:var(--muted);font-weight:600;}
   .add-action-form input,.add-action-form select{
@@ -500,6 +506,7 @@
   <button data-view="settings">Settings</button>
 </nav>
 
+<div id="exampleBar" class="example-bar" role="status"><span><strong>Example data.</strong> These three audits and their actions are made up, to show how the dashboard works. Nothing here is saved.</span><button type="button" id="clearExampleBtn">Clear example and start my own</button></div>
 <div id="connStatusBar" style="background:rgba(0,217,192,0.12);color:#00D9C0;border-bottom:1px solid #2A3A52;font-size:0.78rem;padding:7px 16px;text-align:center;display:none;"></div>
 
 <main>
@@ -731,13 +738,13 @@
     try { return JSON.parse(localStorage.getItem(STORAGE_AUDITS)) || []; }
     catch(e){ return []; }
   }
-  function saveAuditsLocal(list){ localStorage.setItem(STORAGE_AUDITS, JSON.stringify(list)); }
+  function saveAuditsLocal(list){ localStorage.setItem(STORAGE_AUDITS, JSON.stringify(list.filter(a=>!a.example))); }
 
   function loadActions(){
     try { return JSON.parse(localStorage.getItem(STORAGE_ACTIONS)) || []; }
     catch(e){ return []; }
   }
-  function saveActionsLocal(list){ localStorage.setItem(STORAGE_ACTIONS, JSON.stringify(list)); }
+  function saveActionsLocal(list){ localStorage.setItem(STORAGE_ACTIONS, JSON.stringify(list.filter(a=>!a.example))); }
 
   function loadConfig(){
     try { return JSON.parse(localStorage.getItem(STORAGE_CONFIG)) || {}; }
@@ -773,6 +780,58 @@
 
   let audits = loadAudits();
   let actions = loadActions();
+
+  // ---------- Example data ----------
+  // Shown only on a first visit: nothing saved on this device and no shared sheet.
+  // Example records are flagged, never written to storage, and removed as soon as
+  // the visitor saves an audit, adds an action, connects a sheet or clears them.
+  function buildExample(){
+    const plan = [
+      { date:"2026-08-14", scores:{sort:3,set:2,shine:3,standardize:2,sustain:1,safety:3,spirit:2} },
+      { date:"2026-09-11", scores:{sort:4,set:3,shine:3,standardize:3,sustain:2,safety:4,spirit:3} },
+      { date:"2026-10-16", scores:{sort:5,set:4,shine:4,standardize:3,sustain:3,safety:4,spirit:4} }
+    ];
+    const ex = plan.map((p,n)=>{
+      const items = {}, notes = {};
+      S_DEFS.forEach(sd=>{ items[sd.key] = sd.items.map((_,i)=> i < p.scores[sd.key]); notes[sd.key] = ""; });
+      return { id:"example_a"+n, example:true, date:p.date, auditor:"Example auditor",
+               area:"Example: assembly bay", scores:p.scores, notes:notes, items:items };
+    });
+    const last = ex[ex.length-1], acts = [];
+    const owners = ["Team leader","Cell leader","","Maintenance",""];
+    let k = 0;
+    S_DEFS.forEach(sd=>{
+      sd.items.forEach((txt,i)=>{
+        if(last.items[sd.key][i]) return;
+        const owner = owners[k % owners.length];
+        acts.push({ id:"example_act"+k, example:true, sourceKey:last.id+"_"+sd.key+"_"+i,
+          title:`[${sd.name}] ${txt}`, owner:owner, due: owner ? "2026-11-"+(10+k) : "",
+          done: k % 4 === 0 && !!owner, sColor:sd.color, sKey:sd.key,
+          createdAt: Date.parse(last.date), completedAt: (k % 4 === 0 && owner) ? Date.parse(last.date)+864e5*7 : null });
+        k++;
+      });
+    });
+    return { audits:ex, actions:acts };
+  }
+  let showingExample = false;
+  try {
+    if(localStorage.getItem(STORAGE_AUDITS) === null && localStorage.getItem(STORAGE_ACTIONS) === null && !getWebAppUrl()){
+      const ex = buildExample(); audits = ex.audits; actions = ex.actions; showingExample = true;
+    }
+  } catch(e){}
+  function dropExample(){
+    if(!showingExample) return;
+    audits = audits.filter(a=>!a.example);
+    actions = actions.filter(a=>!a.example);
+    showingExample = false;
+    document.getElementById("exampleBar").classList.remove("show");
+  }
+  if(showingExample) document.getElementById("exampleBar").classList.add("show");
+  document.getElementById("clearExampleBtn").addEventListener("click", ()=>{
+    dropExample();
+    saveAuditsLocal(audits); saveActionsLocal(actions);
+    location.reload();
+  });
 
   function applyRemoteResult(result){
     if(!result || result.error) return false;
@@ -965,6 +1024,7 @@
   });
 
   document.getElementById("saveAuditBtn").addEventListener("click", ()=>{
+    dropExample();
     const date = document.getElementById("auditDate").value;
     if(!date){ alert("Please set an audit date."); return; }
     const scores = currentFormScores();
@@ -1654,6 +1714,7 @@
   }
 
   document.getElementById("addActionBtn").addEventListener("click", ()=>{
+    dropExample();
     const title = document.getElementById("actTitle").value.trim();
     if(!title){ alert("Enter an action description."); return; }
     const item = {
@@ -1696,6 +1757,7 @@
   }
 
   document.getElementById("saveSettingsBtn").addEventListener("click", ()=>{
+    dropExample();
     const url = document.getElementById("webAppUrlInput").value.trim();
     saveConfig({ webAppUrl: url });
     updateConnStatusBar();
@@ -1743,30 +1805,5 @@
   syncFromRemote(renderDashboard);
 })();
 </script>
-<!-- Back to portfolio hub: paste this block just before </body> on every dashboard page -->
-<script>
-(function(){
-  if (document.getElementById('hub-link-host')) return;
-  var host = document.createElement('rm-hub-link');
-  host.id = 'hub-link-host';
-  host.style.cssText = 'display:block!important;position:static!important;visibility:visible!important;opacity:1!important;';
-  var root = host.attachShadow({mode:'open'});
-  root.innerHTML =
-    '<style>' +
-    ':host{all:initial}' +
-    'a{position:fixed;left:12px;bottom:12px;z-index:2147483647;display:inline-flex;align-items:center;' +
-    'min-height:44px;padding:0 16px;border-radius:999px;box-sizing:border-box;' +
-    'font:700 14px/1 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;' +
-    'color:#f2f1ff;text-decoration:none;background:#1b1946;border:1px solid #8b78ff;' +
-    'box-shadow:0 0 18px rgba(139,92,246,.55);pointer-events:auto;cursor:pointer;-webkit-tap-highlight-color:transparent}' +
-    'a:hover,a:focus-visible{border-color:#22d3ee;outline:2px solid #22d3ee;outline-offset:2px}' +
-    '@media print{a{display:none}}' +
-    '</style>' +
-    '<a href="https://rmilburn1980.github.io/" target="_top" aria-label="Back to Richard Milburn\'s portfolio hub">← Portfolio hub</a>';
-  /* attach to <html>, not <body>, so a transform or overflow on body cannot trap or clip it */
-  document.documentElement.appendChild(host);
-})();
-</script>
-<noscript><a href="https://rmilburn1980.github.io/" style="position:fixed;left:12px;bottom:12px;padding:12px 16px;background:#1b1946;color:#f2f1ff;border:1px solid #8b78ff;border-radius:999px;font:700 14px system-ui,sans-serif;text-decoration:none">&larr; Portfolio hub</a></noscript>
 </body>
 </html>
